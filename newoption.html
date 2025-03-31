@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="fraudApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Prevention Forms</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; gap: 20px; }
+        .container { width: 90%; max-width: 600px; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 15px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); text-align: center; }
+        h1 { font-size: 1.8rem; letter-spacing: 2px; margin-bottom: 15px; background: linear-gradient(45deg, #4ade80, #facc15); -webkit-background-clip: text; color: transparent; }
+        form { display: flex; flex-direction: column; gap: 15px; text-align: left; }
+        label { font-weight: bold; }
+        input, select { width: 100%; padding: 10px; border: none; border-radius: 8px; font-size: 1rem; }
+        .btn { padding: 10px; font-size: 1rem; font-weight: bold; border: none; border-radius: 10px; background: linear-gradient(90deg, #4ade80, #facc15); cursor: pointer; transition: 0.3s; }
+        .btn:hover { transform: scale(1.05); background: linear-gradient(90deg, #facc15, #4ade80); }
+    </style>
+</head>
+<body ng-controller="FraudController">
+    <!-- Smart Geofencing -->
+    <div class="container">
+        <h1>Geofencing Authentication</h1>
+        <form ng-submit="enableGPS()">
+            <label for="location">Enter Location:</label>
+            <input type="text" id="location" ng-model="location" required>
+            <button type="submit" class="btn">Enable</button>
+        </form>
+        <p ng-show="gpsMessage">{{ gpsMessage }}</p>
+    </div>
+
+    <!-- Honeypot for Fraud Detection -->
+    <div class="container">
+        <h1>Honeypot Setup</h1>
+        <form ng-submit="setupHoneypot()">
+            <label for="honeypot-email">Honeypot Email:</label>
+            <input type="email" id="honeypot-email" ng-model="honeypotEmail" required>
+            <button type="submit" class="btn">Create Honeypot</button>
+        </form>
+        <p ng-show="honeypotMessage">{{ honeypotMessage }}</p>
+    </div>
+
+    <!-- Adaptive CAPTCHA -->
+    <div class="container">
+        <h1>CAPTCHA Configuration</h1>
+        <form ng-submit="validateCaptcha()">
+            <label for="captcha-level">CAPTCHA Sensitivity:</label>
+            <select id="captcha-level" ng-model="captchaLevel" ng-change="generateCaptcha()" required>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <p ng-show="generatedCaptcha">Captcha: <strong>{{ generatedCaptcha }}</strong></p>
+            <label for="captcha-input">Enter CAPTCHA:</label>
+            <input type="text" id="captcha-input" ng-model="captchaInput" required>
+            <button type="submit" class="btn">Verify</button>
+        </form>
+        <p ng-show="captchaMessage">{{ captchaMessage }}</p>
+    </div>
+
+    <!-- Anomaly-Based Account Locking -->
+    <div class="container" ng-show="captchaValidated">
+        <h1>Account Locking Settings</h1>
+        <form ng-submit="setLockPassword()">
+            <label for="lock-password">Set Lock Password:</label>
+            <input type="password" id="lock-password" ng-model="lockPassword" required>
+            <button type="submit" class="btn">Save</button>
+        </form>
+        <p ng-show="lockMessage">{{ lockMessage }}</p>
+    </div>
+
+    <!-- Fraudulent Account Link Analysis -->
+    <div class="container" ng-show="lockValidated">
+        <h1>Fraud Network Analysis</h1>
+        <form>
+            <label for="account-id">Enter Account ID:</label>
+            <input type="text" id="account-id" required>
+            <a href="analyse.html">  <submit type="submit" class="btn">Analyze</submit></a>
+        </form>
+    </div>
+
+    <script>
+        var app = angular.module('fraudApp', []);
+        app.controller('FraudController', function ($scope) {
+            $scope.enableGPS = function () {
+                $scope.gpsMessage = "GPS is enabled on your device.";
+            };
+
+            $scope.setupHoneypot = function () {
+                $scope.honeypotMessage = "Honeypot email has been set up.";
+            };
+
+            $scope.generateCaptcha = function () {
+                $scope.generatedCaptcha = Math.random().toString(36).substring(2, 8).toUpperCase();
+                $scope.captchaInput = "";
+                $scope.captchaMessage = "";
+            };
+
+            $scope.validateCaptcha = function () {
+                if ($scope.captchaInput === $scope.generatedCaptcha) {
+                    $scope.captchaMessage = "CAPTCHA verified successfully.";
+                    $scope.captchaValidated = true;
+                } else {
+                    $scope.captchaMessage = "Incorrect CAPTCHA. Please try again.";
+                    $scope.captchaValidated = false;
+                }
+            };
+
+            $scope.setLockPassword = function () {
+                if ($scope.lockPassword) {
+                    $scope.lockMessage = "Lock password has been set.";
+                    $scope.lockValidated = true;
+                }
+            };
+        });
+    </script>
+</body>
+</html>

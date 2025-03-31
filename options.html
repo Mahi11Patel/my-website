@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Prevention Forms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* 🔵 General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* 🔥 Background & Theme */
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* 📦 Main Container */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        /* 🌟 Title */
+        h1 {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* 🏆 Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #4ade80, #facc15);
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #facc15, #4ade80);
+        }
+    </style>
+</head>
+<body>
+    <!-- Smart Geofencing -->
+    <div class="container">
+        <h1>Geofencing Authentication</h1>
+        <form>
+            <label for="location">Enter Location:</label>
+            <input type="text" id="location" required>
+            <button type="submit" class="btn">Enable</button>
+        </form>
+    </div>
+
+    <!-- Honeypot for Fraud Detection -->
+    <div class="container">
+        <h1>Honeypot Setup</h1>
+        <form>
+            <label for="honeypot-email">Honeypot Email:</label>
+            <input type="email" id="honeypot-email" required>
+            <button type="submit" class="btn">Create Honeypot</button>
+        </form>
+    </div>
+
+    <!-- Adaptive CAPTCHA -->
+    <div class="container">
+        <h1>CAPTCHA Configuration</h1>
+        <form>
+            <label for="captcha-level">CAPTCHA Sensitivity:</label>
+            <select id="captcha-level" required>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <button type="submit" class="btn">Apply</button>
+        </form>
+    </div>
+
+    <!-- AI-Powered Insider Threat Detection -->
+    <div class="container">
+        <h1>Insider Threat Monitoring</h1>
+        <form>
+            <label for="user-id">User ID:</label>
+            <input type="text" id="user-id" required>
+            <button type="submit" class="btn">Monitor</button>
+        </form>
+    </div>
+
+    <!-- Behavioral Device Fingerprinting -->
+    <div class="container">
+        <h1>Device Fingerprinting</h1>
+        <form>
+            <label for="device-id">Device ID:</label>
+            <input type="text" id="device-id" required>
+            <button type="submit" class="btn">Register</button>
+        </form>
+    </div>
+
+    <!-- Social Engineering Attack Detection -->
+    <div class="container">
+        <h1>Phishing Report</h1>
+        <form>
+            <label for="attack-url">Suspicious URL:</label>
+            <input type="url" id="attack-url" required>
+            <button type="submit" class="btn">Report</button>
+        </form>
+    </div>
+
+    <!-- Anomaly-Based Account Locking -->
+    <div class="container">
+        <h1>Account Locking Settings</h1>
+        <form>
+            <label for="lock-threshold">Lock Sensitivity:</label>
+            <select id="lock-threshold" required>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <button type="submit" class="btn">Save</button>
+        </form>
+    </div>
+
+    <!-- Fraudulent Account Link Analysis -->
+    <div class="container">
+        <h1>Fraud Network Analysis</h1>
+        <form>
+            <label for="account-id">Enter Account ID:</label>
+            <input type="text" id="account-id" required>
+            <button type="submit" class="btn">Analyze</button>
+        </form>
+    </div>
+</body>
+</html>
